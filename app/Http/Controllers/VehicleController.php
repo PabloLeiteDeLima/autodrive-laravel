@@ -81,7 +81,7 @@ class VehicleController extends Controller
 
         // 3. Redirecionamento para tela de listagem de veículos.
         // Enviar uma mensagem de sucesso.
-        return redirect()->route("vehicle.index")->with("sucesso", "Veículo excluído com sucesso!");
+        return redirect()->route("vehicles.index")->with("sucesso", "Veículo excluído com sucesso!");
     }
 
     /**
@@ -104,12 +104,12 @@ class VehicleController extends Controller
      */
     public function update(Request $request,int $id)
     {
-        // 1. Bunsca o vehicle que será atualizada.
+        // 1. Busca o vehicle que será atualizada.
         $carro = Vehicle::findOrFail($id);
 
         // 2. Validando os dados do formulário (atualizar)
         $dados = $request->validate([
-            "marca"         => "requered|string|max:50",
+            "marca"         => "required|string|max:50",
             "modelo"        => "required| string|max:50",
             "ano"           => "required|integer|min:1950|max: " . (date("Y") + 1),
             "placa"         => "required|string|max:8|unique:vehicles,placa," . $carro->id,
@@ -127,7 +127,7 @@ class VehicleController extends Controller
         // 4. Atualizar os dadso do veiculo no banco 
         $carro->update($dados);
 
-        // 5. Redirecionamento de pagina para listagem de veiculs.
+        // 5. Redirecionamento de pagina para listagem de veiculos.
         return redirect()->route("vehicles.index")->with("sucesso", "Veículo Atualizado com sucesso!!!");
     }// fechando a função update().
 
