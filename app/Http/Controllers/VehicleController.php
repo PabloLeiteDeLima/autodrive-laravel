@@ -65,4 +65,70 @@ class VehicleController extends Controller
         // O ->with() grava uma mensagem temporária ('sucesso') na sessão para ser exibida na tela
         return redirect()->route("vehicles.index")->with("sucesso", "Veículo cadastrado com sucesso!");
     }
+
+    /**
+     * Remove o veículo do banco de dados.
+     * (Substitui o 'deletarCarro.php')
+     */
+    public function destroy (int $id){
+
+        // 1. Busca o vehicle pelo ID.
+        // O método findOrFail lança automaticamente um erro 404 (Não Encontrado) se o ID não existir.
+        $carro = Vehicle::findOrFail($id);
+
+        // 2. Execulta o delete por baixo dos panos
+        $carro->delete();
+
+        // 3. Redirecionamento para tela de listagem de veículos.
+        // Enviar uma mensagem de sucesso.
+        return redirect()->route("vehicle.index")->with("sucesso", "Veículo excluído com sucesso!");
+    }
+
+    /**
+     * Exibe o formulário de edição preenchido com os dados do veículo.
+     * (Substitui o 'formularioAtualizarVeiculo.php')
+     */
+    public function edit(int $id)
+    {
+        // 1. Busca o vehicle pelo ID.
+        // O método findOrFail lança automaticamente um erro 404 (não encontrado) se o ID não existir.
+        $carro = Vehicle::findOrFail($id);
+
+        // 2. Abre a view 'edit.blade.php' dentro da pasta 'resources/views/vehicles/'
+        // Envia os dados do veículo encontrado para preencher os inputs do formulário.
+        return view("vehicles.edit", compact("carro"));
+    }
+
+    /**
+     * Recebe os dados alterados do formulário e o ID do veículo.
+     */
+    public function update(Request $request,int $id)
+    {
+        // 1. Bunsca o vehicle que será atualizada.
+        $carro = Vehicle::findOrFail($id);
+
+        // 2. Validando os dados do formulário (atualizar)
+        $dados = $request->validate([
+            "marca"         => "requered|string|max:50",
+            "modelo"        => "required| string|max:50",
+            "ano"           => "required|integer|min:1950|max: " . (date("Y") + 1),
+            "placa"         => "required|string|max:8|unique:vehicles,placa," . $carro->id,
+            "preco"         => "required|string",
+            "cambio"        => "required|string|max:15",
+            "observacao"    => "nullable|string",
+        ]);
+
+        // 3. Tratando o preço.
+        // Removendo 'R$' , espaços e ponto.
+        $precoLimpo = str_replace(["R$", " ", "."], "", $dados["preco"]);
+        // Subistituindo a vírgula pelo ponto.
+        $dados["preco"] = str_replace(",", ".", $precoLimpo);
+
+        // 4. Atualizar os dadso do veiculo no banco 
+        $carro->update($dados);
+
+        // 5. Redirecionamento de pagina para listagem de veiculs.
+        return redirect()->route("vehicles.index")->with("sucesso", "Veículo Atualizado com sucesso!!!");
+    }// fechando a função update().
+
 }
