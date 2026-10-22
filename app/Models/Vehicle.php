@@ -2,13 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Vehicle extends Model
 {
-    protected $table = 'vehicles';
-    protected $primaryKey = 'id';
+    // Habilita o uso de Factories para testes automatizados (Super valorizado!)
+    use HasFactory;
 
+    /**
+     * Os atributos que podem ser atribuídos em massa.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'marca',
         'modelo',
@@ -16,6 +22,7 @@ class Vehicle extends Model
         'placa',
         'preco',
         'cambio',
-        'observacao'
+        'observacao',
+        'foto' 
     ];
 }
