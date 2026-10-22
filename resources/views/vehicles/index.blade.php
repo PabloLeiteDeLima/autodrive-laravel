@@ -14,19 +14,35 @@
             <h2>Estoque de Veículos</h2>
             <p>Consulte, edite ou remova os carros cadastrados no sistema.</p>
         </div>
+        
+        <!-- Bloco de Botões Alinhados usando Classes -->
+        <div class="header-buttons">
+            <!-- 1. Botão Home -->
+            <a href="{{ url('/') }}" class="btn-add btn-home">
+                🏠 Home
+            </a>
+
+            <!-- 2. Botão Estoque (Cadastrar Novo) -->
+            <a href="{{ route('vehicles.create') }}" class="btn-add btn-create">
+                ➕ Cadastrar
+            </a>
+
+            <!-- 3. Botão Sair -->
+            <form method="POST" action="{{ route('logout') }}" class="form-logout">
+                @csrf
+                <button type="submit" class="btn-add btn-logout">
+                    🚪 Sair
+                </button>
+            </form>
+        </div>
     </div>
 
     <!-- Alerta de Sucesso -->
     @if(session('sucesso'))
-        <div style="background-color: #d4edda; color: #155724; padding: 15px; margin-bottom: 20px; border-radius: 5px; font-weight: 600;">
+        <div class="alert alert-success">
             {{ session('sucesso') }}
         </div>
     @endif
-
-    <div class="table-actions">
-        <input type="text" id="searchBar" placeholder="🔍 Buscar modelo...">
-        <a href="{{ route('vehicles.create') }}" class="btn-add">+ Cadastrar Novo</a>
-    </div>
 
     <div class="table-responsive">
         <table class="dados-tabela">
@@ -45,7 +61,7 @@
             </thead>
             <tbody>
     
-    @foreach($carros as $carro)
+            @foreach($carros as $carro)
                 <tr>
                     <td>{{ $carro->id }}</td>
                     <td><span class="badge-marca">{{ $carro->marca }}</span></td>
@@ -59,22 +75,22 @@
                         <div class="btn-group">
                             <a href="{{ route('vehicles.edit', $carro->id) }}" class="btn-action btn-edit" title="Editar">✏️</a>
 
-                            <form action="{{ route('vehicles.destroy', $carro->id) }}" method="POST" style="display:inline;"
-                                  onsubmit="return confirm('Tem certeza que deseja excluir o veículo {{ $carro->modelo }}?')">
+                            <!-- Removido o JS e CSS embutidos. Adicionada a classe form-delete e data-attribute -->
+                            <form action="{{ route('vehicles.destroy', $carro->id) }}" method="POST" class="form-delete" data-modelo="{{ $carro->modelo }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn-action btn-delete" style="background:none; border:none; cursor:pointer;" title="Excluir">🗑️</button>
+                                <button type="submit" class="btn-action btn-delete" title="Excluir">🗑️</button>
                             </form>
                         </div>
                     </td>
                 </tr>
-    @endforeach
+            @endforeach
 
-    @if($carros->isEmpty())
+            @if($carros->isEmpty())
                 <tr>
-                    <td colspan="9" class="text-center" style="padding: 20px;">Nenhum veículo cadastrado no estoque.</td>
+                    <td colspan="9" class="text-center table-empty-message">Nenhum veículo cadastrado no estoque.</td>
                 </tr>
-    @endif
+            @endif
             </tbody>
         </table>
     </div>

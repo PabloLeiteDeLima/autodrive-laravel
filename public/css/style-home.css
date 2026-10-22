@@ -1,0 +1,166 @@
+/* ==========================================================================
+   CSS DA PÁGINA INICIAL PÚBLICA (VITRINE)
+   ========================================================================== */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Menu de Navegação Superior */
+.navbar {
+    background-color: #1e293b;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navbar-menu {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-menu a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.navbar-menu a:hover {
+    color: #ffffff;
+}
+
+.btn-acesso {
+    background-color: #4f46e5;
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background 0.2s !important;
+}
+
+.btn-acesso:hover {
+    background-color: #4338ca;
+}
+
+/* Container do Conteúdo Principal */
+.main-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.titulo-vitrine {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.titulo-vitrine h1 {
+    color: #1e293b;
+    margin: 0 0 10px 0;
+}
+
+.titulo-vitrine p {
+    color: #64748b;
+    margin: 0;
+}
+
+/* Grid dos Quadradinhos (Cards) */
+.vehicles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* Estrutura de cada Quadradinho (Card) */
+.vehicle-card {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.vehicle-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Área da Foto - Elemento Imagem Real */
+img.vehicle-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Área da Foto - Bloco de Substituição (Sem Foto) */
+div.vehicle-image-placeholder {
+    width: 100%;
+    height: 180px;
+    background-color: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+/* Dados do Veículo embaixo da Foto */
+.vehicle-info {
+    padding: 20px;
+}
+
+.vehicle-brand {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #4f46e5;
+    margin-bottom: 5px;
+}
+
+.vehicle-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1e293b;
+    margin: 0 0 10px 0;
+}
+
+.vehicle-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #e2e8f0;
+    padding-bottom: 10px;
+}
+
+.vehicle-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #10b981;
+}
+
+/* Mensagem de estado vazio da vitrine */
+.no-vehicles {
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 40px;
+    color: #64748b;
+    background: #ffffff;
+    border-radius: 8px;
+}

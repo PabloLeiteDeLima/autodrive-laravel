@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CSS DA TABELA DE ESTOQUE (VISUALIZAR VEÍCULOS)
+   CSS DA PÁGINA DE ESTOQUE (VISUALIZAR VEÍCULOS)
    ========================================================================== */
 
 body {
@@ -19,7 +19,12 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
+/* Estrutura do Topo (Cabeçalho Reorganizado com Flexbox) */
 .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     margin-bottom: 25px;
     border-bottom: 1px solid #eee;
     padding-bottom: 15px;
@@ -37,6 +42,61 @@ body {
     font-size: 14px;
 }
 
+/* Container do Menu de Botões de Ação do Topo */
+.header-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Botão Base do Menu Superior */
+.btn-add {
+    text-decoration: none;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+    border: none;
+    font-family: inherit;
+}
+
+/* Cores customizadas e estados de foco dos botões superiores */
+.btn-home { 
+    background-color: #64748b; 
+    color: #fff !important; 
+}
+.btn-home:hover { 
+    background-color: #475569; 
+}
+
+.btn-create { 
+    background-color: #4f46e5; 
+    color: #fff !important; 
+}
+.btn-create:hover { 
+    background-color: #4338ca; 
+}
+
+.btn-logout { 
+    background-color: #ef4444; 
+    color: #fff !important; 
+    cursor: pointer;
+}
+.btn-logout:hover { 
+    background-color: #dc2626; 
+}
+
+.form-logout {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+/* Filtros e Barra de Pesquisa */
 .table-actions {
     display: flex;
     justify-content: space-between;
@@ -52,22 +112,14 @@ body {
     border-radius: 6px;
     font-size: 14px;
     outline: none;
+    transition: border-color 0.2s;
 }
 
 #searchBar:focus {
     border-color: #4f46e5;
 }
 
-.btn-add {
-    background-color: #4f46e5;
-    color: white !important;
-    text-decoration: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 14px;
-}
-
+/* Estrutura de Dados da Tabela */
 .table-responsive {
     overflow-x: auto;
 }
@@ -78,7 +130,8 @@ body {
     text-align: left;
 }
 
-.dados-tabela th, .dados-tabela td {
+.dados-tabela th, 
+.dados-tabela td {
     padding: 14px;
     border-bottom: 1px solid #e2e8f0;
 }
@@ -89,6 +142,7 @@ body {
     font-weight: 600;
 }
 
+/* Badges e Classes de Utilidade da Tabela */
 .badge-marca {
     background-color: #e2e8f0;
     padding: 4px 8px;
@@ -105,6 +159,7 @@ body {
 .text-center { text-align: center; }
 .text-uppercase { text-transform: uppercase; }
 
+/* Grupo de Ações de Linha (Editar e Excluir) */
 .btn-group {
     display: flex;
     gap: 10px;
@@ -119,5 +174,30 @@ body {
     transition: background 0.2s;
 }
 
-.btn-edit:hover { background-color: #fef3c7; }
-.btn-delete:hover { background-color: #fee2e2; }
+.btn-edit:hover { 
+    background-color: #fef3c7; 
+}
+
+.btn-action.btn-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.btn-delete:hover { 
+    background-color: #fee2e2; 
+}
+
+/* Bloco de Mensagem de Alerta (Sucesso do Laravel) */
+.alert.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+/* Mensagem de estoque vazio */
+.table-empty-message {
+    padding: 20px !important;
+}

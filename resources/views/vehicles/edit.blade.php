@@ -17,9 +17,10 @@
         <a href="{{ route('vehicles.index') }}" class="btn-visualizar">📋 Voltar ao Estoque</a>
     </div>
 
+    <!-- Bloco de Erros Global (Limpo) -->
     @if ($errors->any())
-        <div style="background-color: #f8d7da; color: #721c24; padding: 15px; margin-bottom: 25px; border-radius: 6px;">
-            <ul style="margin: 0; padding-left: 20px;">
+        <div class="alert alert-danger">
+            <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -49,7 +50,8 @@
 
             <div class="form-group">
                 <label for="placa">Placa</label>
-                <input type="text" id="placa" name="placa" value="{{ old('placa', $carro->placa) }}" style="text-transform: uppercase;">
+                <!-- Removido o style inline e adicionada a classe input-placa -->
+                <input type="text" id="placa" name="placa" class="input-placa" value="{{ old('placa', $carro->placa) }}">
             </div>
 
             <div class="form-group">
@@ -73,7 +75,8 @@
             </div>
         </div>
 
-        <button type="submit" class="btn-submit" style="background-color: #4f46e5;">Salvar Alterações</button>
+        <!-- Removido o style inline e adicionada a classe btn-save -->
+        <button type="submit" class="btn-submit btn-save">Salvar Alterações</button>
     </form>
 </div>
 </body>

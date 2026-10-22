@@ -16,7 +16,7 @@ body {
     background: #ffffff;
     padding: 40px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* Estrutura do Topo (Cabeçalho com Alinhamento do Botão na Direita) */
@@ -46,7 +46,7 @@ body {
 .btn-visualizar {
     display: inline-flex;
     align-items: center;
-    background-color: #4f46e5; /* Azul/Roxo moderno */
+    background-color: #4f46e5;
     color: white !important;
     text-decoration: none;
     padding: 10px 18px;
@@ -101,22 +101,28 @@ select {
     color: #333;
 }
 
-input:focus, select:focus {
+input:focus, 
+select:focus {
     border-color: #4f46e5;
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
-/* Mensagens de Erro */
+/* Forçar letras maiúsculas visualmente no campo de placa */
+.input-placa {
+    text-transform: uppercase;
+}
+
+/* Mensagens de Erro Modulares */
 .error-message {
     color: #ef4444;
     font-size: 12px;
     margin-top: 5px;
-    display: none; /* Controlado via JavaScript de validação */
+    display: none;
 }
 
-/* Botão de Envio (Cadastrar) */
+/* Botões de Ação (Submit e Salvar) */
 .btn-submit {
-    background-color: #10b981; /* Verde moderno */
+    background-color: #10b981;
     color: white;
     border: none;
     padding: 14px 24px;
@@ -133,18 +139,55 @@ input:focus, select:focus {
     background-color: #059669;
 }
 
+/* Sobrecarga para o botão específico de salvar alterações (Tela de Edição) */
+.btn-submit.btn-save {
+    background-color: #4f46e5;
+    box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+}
+
+.btn-submit.btn-save:hover {
+    background-color: #4338ca;
+}
+
+/* Bloco de Erros Globais do Laravel (Validação) */
+.alert.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    border: 1px solid #f5c6cb;
+}
+
+.alert.alert-danger ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.alert.alert-danger li {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.alert.alert-danger li:last-child {
+    margin-bottom: 0;
+}
+
 /* Responsividade para Telas Menores e Celulares */
 @media (max-width: 600px) {
     .header-container {
         flex-direction: column;
         align-items: stretch;
     }
+    
     .btn-visualizar {
         justify-content: center;
     }
+    
     .form-grid {
         grid-template-columns: 1fr;
     }
+    
     .form-group.full-width {
         grid-column: span 1;
     }
