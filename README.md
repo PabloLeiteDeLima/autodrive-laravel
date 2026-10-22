@@ -1,76 +1,58 @@
-# 🚗 AutoDrive - Sistema de Gerenciamento de Veículos (Versão Laravel)
+# 🚗 AutoDrive - Sistema de Gerenciamento de Veículos
 
-O **AutoDrive** é um sistema para gerenciamento de estoque de veículos de uma concessionária. Este projeto foi originalmente desenvolvido por mim em PHP Nativo (com POO, PDO e MVC do zero) e agora foi **migrado para o ecossistema Laravel 11** com o objetivo de aplicar padrões modernos de mercado e aumentar a escalabilidade da aplicação.
-
----
-
-## 🚀 Tecnologias Utilizadas
-
-### Backend & Banco de Dados
-* **PHP 8.2+** como linguagem do servidor.
-* **Laravel Framework** para padronização de arquitetura.
-* **Eloquent ORM** substituindo a camada antiga de DAO para persistência segura de dados.
-* **MySQL** para gerenciamento de banco de dados relacional (via XAMPP).
-
-### Frontend (Desenvolvido em parceria com I.A)
-* **HTML5 & CSS3** com design responsivo.
-* **JavaScript (Vanilla)** para validações em tempo real e máscaras dinâmicas (Moeda R\$ e Placas).
+O **AutoDrive** é um sistema para gerenciamento de estoque de veículos migrado do PHP Nativo para o **Laravel 11**, focado em escalabilidade, segurança e boas práticas de engenharia de software.
 
 ---
 
-## 🛡️ Segurança & Boas Práticas Aplicadas
+## 🛠️ Tecnologias Principais
 
-* **Form Requests:** Toda a validação que antes era feita com condicionais estruturadas foi isolada em classes de validação nativas do Laravel, garantindo código limpo no Controller.
-* **Proteção XSS nativa:** Uso dos componentes Blade `{{ }}` para renderização segura de strings em tela.
-* **Proteção CSRF:** Formulários blindados com tokens de segurança contra falsificação de requisições transfronteiriças.
-* **Migrations & Seeders:** Controle de versão do banco de dados completo para fácil replicação do ambiente de desenvolvimento.
+* **Backend:** PHP 8.2+, Laravel 11, Eloquent ORM, MySQL.
+* **Frontend (Desenvolvido com auxílio de I.A.):** Blade View Engine, Tailwind CSS, JavaScript (Vanilla) para manipulação de DOM e lógica em tempo real.
 
 ---
 
-## 💻 Como Executar o Projeto Localmente
+## 🛡️ Destaques de Arquitetura e Boas Práticas
 
-### Pré-requisitos
-* PHP 8.2 ou superior
-* Composer instalado
-* XAMPP (Apache e MySQL iniciados)
+* **Route Model Binding:** Uso nativo de resolução de instâncias e tratamento automático de erros 404 nas rotas.
+* **Form Requests Dedicados:** Classes de validação isoladas (`StoreVehicleRequest` e `UpdateVehicleRequest`).
+* **Eloquent Accessors (Laravel 11):** Formatação automática de dados monetários (`preco_formatted`) vindo do banco através do encapsulamento na Model.
+* **Máscaras em Vanilla JS:** Componente leve de formatação monetária (Moeda R\$) em tempo real na digitação, sem dependências de bibliotecas externas (jQuery).
+* **Zelo de Armazenamento:** Exclusão automática de imagens órfãs e substituição de arquivos físicos no servidor ao remover ou atualizar registros.
+* **Tipagem Estrita:** Assinaturas tipadas nos métodos e retornos de todas as Controllers.
+* **Versionamento Semântico:** Histórico de Git estruturado baseado em *Conventional Commits*.
 
-### Passo a Passo
+---
+
+## 💻 Como Executar Localmente
 
 1. **Clone o repositório:**
    ```bash
    git clone https://github.com
    cd autodrive-laravel
    ```
-
-2. **Instale as dependências do projeto:**
+2. **Instale as dependências:**
    ```bash
    composer install
    ```
-
-3. **Configure as variáveis de ambiente:**
-   * Duplique o arquivo `.env.example` e mude o nome da cópia apenas para `.env`.
-   * Configure as credenciais do seu banco de dados MySQL do XAMPP dentro do `.env` (usuário `root` e senha vazia).
-
-4. **Gere a chave da aplicação:**
+3. **Configure o ambiente:** Copie o `.env.example` para `.env` e configure seu banco de dados MySQL.
+4. **Gere a chave e execute as migrações:**
    ```bash
    php artisan key:generate
-   ```
-
-5. **Rode as Migrations (Criar as tabelas no banco):**
-   ```bash
    php artisan migrate
    ```
-
-6. **Inicie o servidor local:**
+5. **Inicie o servidor:**
    ```bash
    php artisan serve
    ```
-   O projeto estará rodando em `http://127.0.0.1:8000`.
+   Acesse em [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ---
 
-## 📩 Contato (Aberto para dicas e sugestões)
-"Acredito que essa é uma maneira de crescimento tanto para quem aprende quanto para quem ensina."
+---
 
+## 📩 Contato
 * **Desenvolvedor:** Pablo Leite de Lima
-* **LinkedIn:** [https://linkedin.com](https://linkedin.com)
+* **GitHub:**   (https://github.com/PabloLeiteDeLima)
+* **LinkedIn:** (https://www.linkedin.com/in/pablo-leite-de-lima-254147249/)  
+       
+       *** Aceito dicas e sujestões ***
