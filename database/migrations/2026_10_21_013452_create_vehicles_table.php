@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('preco', 10, 2);
             $table->string('cambio');
             $table->text('observacao')->nullable();
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

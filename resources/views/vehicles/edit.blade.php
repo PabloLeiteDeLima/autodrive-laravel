@@ -28,7 +28,8 @@
         </div>
     @endif
 
-    <form action="{{ route('vehicles.update', $carro->id) }}" method="POST">
+    <!-- Adicionado o enctype para permitir upload de arquivos na edição -->
+    <form action="{{ route('vehicles.update', $carro) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -50,7 +51,6 @@
 
             <div class="form-group">
                 <label for="placa">Placa</label>
-                <!-- Removido o style inline e adicionada a classe input-placa -->
                 <input type="text" id="placa" name="placa" class="input-placa" value="{{ old('placa', $carro->placa) }}">
             </div>
 
@@ -69,13 +69,24 @@
                 <input type="text" id="preco" name="preco" value="{{ old('preco', number_format($carro->preco, 2, ',', '.')) }}">
             </div>
 
+            <!-- NOVO: Campo de Foto do Veículo com miniatura da foto atual -->
+            <div class="form-group">
+                <label for="foto">Alterar Foto do Veículo</label>
+                <input type="file" id="foto" name="foto" accept="image/*">
+                @if($carro->foto)
+                    <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 12px; color: #64748b;">Foto atual:</span>
+                        <img src="{{ asset('uploads/vehicles/' . $carro->foto) }}" alt="Foto do veículo" style="width: 60px; height: 40px; object-fit: cover; border-radius: 4px; border: 1px solid #cbd5e1;">
+                    </div>
+                @endif
+            </div>
+
             <div class="form-group full-width">
                 <label for="observacao">Observações / Detalhes Adicionais</label>
                 <input type="text" id="observacao" name="observacao" value="{{ old('observacao', $carro->observacao) }}">
             </div>
         </div>
 
-        <!-- Removido o style inline e adicionada a classe btn-save -->
         <button type="submit" class="btn-submit btn-save">Salvar Alterações</button>
     </form>
 </div>

@@ -11,7 +11,7 @@ class StoreVehicleRequest extends FormRequest
         return true; // Tem que esta true para liberar o formulário.
     }
 
-    public function rules(): array
+        public function rules(): array
     {
         return [
             "marca" => "required|string|max:50",
@@ -21,6 +21,8 @@ class StoreVehicleRequest extends FormRequest
             "preco" => "required|string",
             "cambio" => "required|string|max:30",
             "observacao" => "nullable|string",
+            "foto" => "nullable|image|mimes:jpg,jpeg,png|max:2048",
         ];
     }
+
 }

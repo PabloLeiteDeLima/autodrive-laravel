@@ -17,7 +17,7 @@ class SiteController extends Controller
 
         // Abre a view dentro de uma pasta organizada (ex: resources/views/site/home.blade.php)
         // Se você ainda mantém o arquivo direto na raiz, use apenas view('home', compact('carros'))
-        return view('site.home', compact('carros'));
+        return view('home', compact('carros'));
     }
 
     /**
@@ -25,6 +25,6 @@ class SiteController extends Controller
      */
     public function quemSomos(): View
     {
-        return view('site.quem-somos');
+        return view('quem-somos');
     }
 }
