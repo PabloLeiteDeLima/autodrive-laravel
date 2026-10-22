@@ -94,5 +94,7 @@
     </form>
 </div>
 
+<script src="{{ asset('js/mascaras.js') }}"></script>
+
 </body>
 </html>

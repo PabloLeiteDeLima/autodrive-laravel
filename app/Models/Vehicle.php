@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Vehicle extends Model
 {
-    // Habilita o uso de Factories para testes automatizados (Super valorizado!)
     use HasFactory;
 
     /**
@@ -25,4 +25,15 @@ class Vehicle extends Model
         'observacao',
         'foto' 
     ];
+
+    /**
+     * Accessor do Laravel 11 para formatar o preço com o cifrão automaticamente.
+     * Mapeia dinamicamente a propriedade virtual $carro->preco_formatted
+     */
+    protected function precoFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => 'R$ ' . number_format($this->preco, 2, ',', '.')
+        );
+    }
 }

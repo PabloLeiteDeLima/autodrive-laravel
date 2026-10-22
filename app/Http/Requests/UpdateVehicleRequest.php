@@ -25,7 +25,7 @@ class UpdateVehicleRequest extends FormRequest
         $vehicleId = $vehicle ? $vehicle->id : null;
 
         return [
-            "marca"      => "required|string|max:50",
+            "marca"      => "required|string|max:50", // SE LIGA: aqui é: required e eu estava errando colocando 'requered'
             "modelo"     => "required|string|max:50",
             "ano"        => "required|integer|min:1950|max:" . (date("Y") + 1),
             // Ignora o ID do próprio veículo sendo editado na validação de placa única

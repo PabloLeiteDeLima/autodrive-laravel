@@ -66,7 +66,11 @@
 
             <div class="form-group">
                 <label for="preco">Preço (R$)</label>
-                <input type="text" id="preco" name="preco" value="{{ old('preco', number_format($carro->preco, 2, ',', '.')) }}">
+                <input type="text" id="preco" name="preco" value="{{ old('preco', $carro->preco_formatted) }}">
+
+
+                
+                <!-- <input type="text" id="preco" name="preco" value="{{ old('preco', number_format($carro->preco, 2, ',', '.')) }}"> -->
             </div>
 
             <!-- NOVO: Campo de Foto do Veículo com miniatura da foto atual -->
@@ -90,5 +94,8 @@
         <button type="submit" class="btn-submit btn-save">Salvar Alterações</button>
     </form>
 </div>
+
+<script src="{{ asset('js/mascaras.js') }}"></script>
+
 </body>
 </html>
