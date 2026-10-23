@@ -12,6 +12,8 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 COPY . .
 
+ENV NGINX_CONFS=/var/www/html/scripts/nginx.conf
+
 # 1. Instala as dependências do PHP (Gera a pasta vendor)
 RUN composer install --no-dev --optimize-autoloader
 
