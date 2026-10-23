@@ -2,6 +2,10 @@ FROM richarvey/nginx-php-fpm:latest
 
 COPY . .
 
+ENV DB_CONNECTION=pgsql
+ENV DB_PORT=5432
+
+
 RUN chmod +x /var/www/html/scripts/run.sh
 
 # Configurações para o Render e Laravel
