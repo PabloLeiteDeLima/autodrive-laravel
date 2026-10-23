@@ -1,5 +1,10 @@
 FROM richarvey/nginx-php-fpm:latest
 
+# Avisa a imagem do richarvey que a pasta pública do Laravel é a correta
+ENV WEBROOT=/var/www/html/public
+ENV APP_ENV=production
+    
+
 COPY . .
 
 # Garante que as dependências do Laravel sejam instaladas
