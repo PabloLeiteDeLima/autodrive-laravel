@@ -2,11 +2,16 @@ FROM richarvey/nginx-php-fpm:latest
 
 COPY . .
 
+# Garante que as dependências do Laravel sejam instaladas
+RUN composer install --no-dev --optimize-autoloader
+
+# Força o driver do PostgreSQL
 ENV DB_CONNECTION=pgsql
 ENV DB_PORT=5432
 
-
+# Dá permissão para o script rodar
 RUN chmod +x /var/www/html/scripts/run.sh
+
 
 # Configurações para o Render e Laravel
 ENV SKIP_COMPOSER 0
