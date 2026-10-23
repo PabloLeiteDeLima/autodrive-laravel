@@ -2,6 +2,8 @@ FROM richarvey/nginx-php-fpm:latest
 
 COPY . .
 
+RUN chmod +x /var/www/html/scripts/run.sh
+
 # Configurações para o Render e Laravel
 ENV SKIP_COMPOSER 0
 ENV WEBROOT /var/www/html/public
