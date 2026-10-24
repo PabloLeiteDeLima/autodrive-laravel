@@ -1,12 +1,14 @@
 FROM php:8.2-fpm
 
-# Instala dependências do sistema e extensões PHP necessárias para o PostgreSQL e Laravel
+# Instala dependências, extensões PHP e adiciona o Node.js v18 (necessário para o Vite/Mix)
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     zip \
     unzip \
     git \
     curl \
+    && curl -fsSL https://nodesource.com | bash - \
+    && apt-get install -y nodesource-repo nodejs \
     && docker-php-ext-install pdo pdo_pgsql
 
 # Instala o Composer
@@ -20,6 +22,9 @@ COPY . .
 
 # Instala as dependências do Composer para produção
 RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# Instala os pacotes do Node e compila os arquivos CSS e JS para produção
+RUN npm install && npm run build
 
 # Ajusta as permissões para o Laravel
 RUN chown -R www-data:www-data /var/view/storage /var/view/bootstrap/cache
