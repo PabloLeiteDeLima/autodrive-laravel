@@ -36,4 +36,5 @@ RUN chown -R www-data:www-data /var/view/storage /var/view/bootstrap/cache
 EXPOSE 8000
 
 # Executa as migrações em produção e depois inicia o servidor embutido do PHP
-CMD php artisan migrate --force && php artisan config:clear && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
+# CMD php artisan migrate --force && php artisan config:clear && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
+CMD php artisan migrate --force --seed && php artisan config:clear && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
