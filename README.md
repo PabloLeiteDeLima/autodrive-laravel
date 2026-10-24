@@ -23,7 +23,7 @@ O **AutoDrive** é um sistema para gerenciamento de estoque de veículos migrado
 
 ---
 
-## 💻 Como Executar Localmente
+## 💻 Como Executar Localmente (se preferir pode ver - Demonstração Online - fica logo abaixo.)
 
 1. **Clone o repositório:**
    ```bash
@@ -48,7 +48,43 @@ O **AutoDrive** é um sistema para gerenciamento de estoque de veículos migrado
 
 ---
 
+---  
+  
+    
+## 🌐 Demonstração Online (Acesso para Recrutadores)
+
+O sistema está hospedado e rodando ao vivo na plataforma **Render**! Você pode acessar e testar todas as funcionalidades sem precisar instalar nada localmente.
+
+🔗 **Link do Projeto:** [https://autodrive-laravel-app.onrender.com/](https://autodrive-laravel-app.onrender.com/)
+
+### 🔑 Credenciais de Teste:
+Para facilitar a sua avaliação, utilize o usuário padrão abaixo para entrar no sistema:
+* **E-mail:** admin@autodrive.com
+* **Senha:** senha123
 ---
+
+## 📸 Capturas de Tela (Screenshots)
+
+<div align="center">
+  <h3>Tela Home (Antes de Acessar)</h3>
+  <img src="screenshots/tela_home_antes_do_acesso.png" alt="Tela Inicial" width="800px">
+
+  <h3>Tela de Login / Dados de Acesso</h3>
+  <img src="screenshots/login_senha_de_acesso.png" alt="Dados de Acesso" width="800px">
+  
+  <h3>Tela Home (Depois de Acessar)</h3>
+  <img src="screenshots/tela_home_after_do_acesso.png" alt="Home Logado" width="800px">
+
+  <h3>Dashboard / Estoque de Veículos</h3>
+  <img src="screenshots/tela_estoque.png" alt="Estoque de Veículos" width="800px">
+  
+  <h3>Cadastro de Novo Carro</h3>
+  <img src="screenshots/tela_cadastro.png" alt="Cadastro de Carro" width="800px">
+
+  <h3>Edição de Carro</h3>
+  <img src="screenshots/tela_editar.png" alt="Edição de Carro" width="800px">
+</div>
+
 
 ## 📩 Contato
 * **Desenvolvedor:** Pablo Leite de Lima
