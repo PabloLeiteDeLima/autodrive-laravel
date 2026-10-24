@@ -24,8 +24,8 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 # Ajusta as permissões para o Laravel
 RUN chown -R www-data:www-data /var/view/storage /var/view/bootstrap/cache
 
-# Expõe a porta que o Render vai usar (ele injeta a variável $PORT)
+# Expõe a porta dinâmica do Render
 EXPOSE 8000
 
-# Script ou comando para iniciar o servidor embutido do PHP apontando para a pasta pública
-CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
+# Executa as migrações em produção e depois inicia o servidor embutido do PHP
+CMD php artisan migrate --force && php artisan config:clear && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}

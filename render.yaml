@@ -6,10 +6,7 @@ services:
     dockerfilePath: ./Dockerfile
     dockerContext: .
     plan: free
-    region: ohio # Região do servidor (Mantenha igual para o banco e para o app)
-    
-    # Executa as migrações no banco de dados automaticamente antes de liberar o site
-    preDeployCommand: php artisan migrate --force
+    region: ohio # Região do servidor
 
     envVars:
       - key: APP_ENV
@@ -48,4 +45,4 @@ databases:
   - name: autodrive-postgres
     plan: free
     region: ohio
-    postgresMajorVersion: "15" # Nome correto da propriedade aceito pelo Render
+    postgresMajorVersion: "15"
