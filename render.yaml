@@ -48,4 +48,4 @@ databases:
   - name: autodrive-postgres
     plan: free
     region: ohio
-    postgresVersion: "15"
+    postgresMajorVersion: "15" # Nome correto da propriedade aceito pelo Render
