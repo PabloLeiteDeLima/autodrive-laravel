@@ -1,0 +1,34 @@
+# version: '3.8'
+
+services:
+  # Serviço da sua aplicação Laravel
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: laravel-render-app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.docker    # Força o contêiner a usar as configurações do Postgres
+    environment:
+      PORT: 8000       # Simula a variável de porta que o Render injeta automaticamente
+    depends_on:
+      - db             # Garante que o banco de dados suba antes do Laravel
+
+  # Serviço do banco de dados PostgreSQL
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: laravel_db          # Deve bater com o DB_DATABASE do .env.docker
+      POSTGRES_USER: laravel_user      # Deve bater com o DB_USERNAME do .env.docker
+      POSTGRES_PASSWORD: laravel_password  # Deve bater com o DB_PASSWORD do .env.docker
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

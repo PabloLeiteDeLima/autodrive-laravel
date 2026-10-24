@@ -1,37 +1,31 @@
-FROM richarvey/nginx-php-fpm:latest
+FROM php:8.2-fpm
 
-# Configurações de ambiente essenciais para o Render e Laravel
-ENV WEBROOT=/var/www/html/public
-ENV APP_ENV=production
-ENV APP_DEBUG=false
-ENV LOG_CHANNEL=stderr
-ENV PHP_ERRORS_STDERR=1
-ENV RUN_SCRIPTS=1
-ENV REAL_IP_HEADER=1
-ENV COMPOSER_ALLOW_SUPERUSER=1
+# Instala dependências do sistema e extensões PHP necessárias para o PostgreSQL e Laravel
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    zip \
+    unzip \
+    git \
+    curl \
+    && docker-php-ext-install pdo pdo_pgsql
 
-# Configuração crítica de porta para o Render se conectar
-ENV PORT=10000
-ENV EXPOSE_PORT=10000
+# Instala o Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Define o diretório de trabalho
+WORKDIR /var/view
+
+# Copia os arquivos do projeto
 COPY . .
 
-# 1. Instala as dependências do PHP (Gera a pasta vendor)
-RUN composer install --no-dev --optimize-autoloader
+# Instala as dependências do Composer para produção
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# 2. Instala o Node.js e compila o Tailwind CSS via Vite
-RUN apk add --no-cache nodejs npm \
-    && npm install \
-    && npm run build
+# Ajusta as permissões para o Laravel
+RUN chown -R www-data:www-data /var/view/storage /var/view/bootstrap/cache
 
-# 3. Força as variáveis de conexão com o banco PostgreSQL
-ENV DB_CONNECTION=pgsql
-ENV DB_PORT=5432
+# Expõe a porta que o Render vai usar (ele injeta a variável $PORT)
+EXPOSE 8000
 
-# 4. Injeta a regra de rotas diretamente na inicialização do Nginx
-RUN echo "location / { try_files \$uri \$uri/ /index.php?\$query_string; }" > /etc/nginx/addon.d/laravel.conf
-
-# 5. Configura as permissões do script de inicialização do Render
-RUN chmod +x /var/www/html/scripts/run.sh
-
-CMD ["/start.sh"]
+# Script ou comando para iniciar o servidor embutido do PHP apontando para a pasta pública
+CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
