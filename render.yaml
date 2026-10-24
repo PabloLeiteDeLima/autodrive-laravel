@@ -1,0 +1,51 @@
+services:
+  # Configuração da Aplicação Web Laravel (Docker)
+  - type: web
+    name: autodrive-laravel-app
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    region: ohio # Região do servidor (Mantenha igual para o banco e para o app)
+    
+    # Executa as migrações no banco de dados automaticamente antes de liberar o site
+    preDeployCommand: php artisan migrate --force
+
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        generateValue: true # O Render gera uma chave criptográfica segura e única automaticamente
+      - key: LOG_CHANNEL
+        value: stderr
+        
+      # Vincula de forma dinâmica as credenciais do banco de dados criado abaixo
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: autodrive-postgres
+          property: host
+      - key: DB_PORT
+        value: "5432"
+      - key: DB_DATABASE
+        fromDatabase:
+          name: autodrive-postgres
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: autodrive-postgres
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: autodrive-postgres
+          property: password
+
+databases:
+  # Configuração do Banco de Dados PostgreSQL no Render
+  - name: autodrive-postgres
+    plan: free
+    region: ohio
+    postgresVersion: 15
